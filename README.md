@@ -3,7 +3,7 @@
 **An Android app to easily manage Frida server on your device or emulator**
 
 <div align="center">
-  <img width="331" alt="image" src="https://github.com/user-attachments/assets/21984e36-41d7-449a-b185-36653e89d707" />
+  <img width="331" alt="image" src="logo.png" />
 </div>
 
 ---
