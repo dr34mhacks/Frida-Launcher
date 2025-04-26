@@ -2,8 +2,9 @@
 
 **An Android app to easily manage Frida server on your device or emulator**
 
-![frida launcher](https://github.com/user-attachments/assets/3a235958-4212-4eaf-8f26-f742f3227699)
-
+<div align="center">
+  <img width="331" alt="image" src="logo.png" />
+</div>
 
 ---
 
@@ -52,25 +53,30 @@ These repetitive tasks slow down your workflow and introduce room for error—Fr
 ---
 ## Demo
 
-![ezgif-1a5f1f73dba0c7](https://github.com/user-attachments/assets/eee78f07-33b8-4f63-b179-d41a51e1a70b)
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/eee78f07-33b8-4f63-b179-d41a51e1a70b" alt="Project Demo GIF" />
+</div>
 
 ## Screenshots
 
 ### Main Dashboard
 
-![frida launcher](https://github.com/user-attachments/assets/7b19a551-77cc-46dd-86fc-7dc7b0a89f83)
+<div align="center">
+  <img width="331" alt="image" src="https://github.com/user-attachments/assets/21984e36-41d7-449a-b185-36653e89d707" />
+</div>
 
 
 ### NFC Challenge (Objection Example)
 
-![fridalauncher objection](https://github.com/user-attachments/assets/7d27b915-b870-46c4-943e-a3a8baffd04c)
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/de9e564e-f788-4eb3-bda5-54ae9dd0827c" />
 
 
 ### Logs Panel
 
-![logfrida launcher](https://github.com/user-attachments/assets/9113c051-b099-4fff-a85f-5147f90525e4)
-
+<div align="center">
+<img width="331" alt="image" src="https://github.com/user-attachments/assets/df9d61e5-1d32-40ef-9899-dd96665455eb" />
+</div>
 
 ---
 
