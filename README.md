@@ -50,6 +50,9 @@ These repetitive tasks slow down your workflow and introduce room for error—Fr
 - **Live Logs**: View real‑time Frida server logs in‑app, with Copy and Clear controls.
 
 ---
+## Demo
+
+![ezgif-11757575020ac9](https://github.com/user-attachments/assets/66edad88-f5d6-46f9-9d8d-96b9c92d6bd5)
 
 ## Screenshots
 
