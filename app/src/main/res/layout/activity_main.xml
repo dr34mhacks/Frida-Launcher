@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/surface"
+        app:elevation="4dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/surface"
+            app:title="Frida Launcher"
+            app:titleTextAppearance="@style/TextAppearance.FridaLauncher.Headline"
+            app:titleTextColor="@color/blue_primary" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:scrollbars="vertical"
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/statusCardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/Widget.FridaLauncher.Card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Device Status"
+                        android:textAppearance="@style/TextAppearance.FridaLauncher.Subtitle" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/deviceInfoTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Device: Checking..."
+                            android:textAppearance="@style/TextAppearance.FridaLauncher.Body" />
+
+                        <TextView
+                            android:id="@+id/architectureTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="arm64"
+                            android:textAppearance="@style/TextAppearance.FridaLauncher.Body" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/installedStatusTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Installed: No"
+                            android:textAppearance="@style/TextAppearance.FridaLauncher.Body" />
+
+                        <TextView
+                            android:id="@+id/runningStatusTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Running: No"
+                            android:textAppearance="@style/TextAppearance.FridaLauncher.Body" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/versionTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Version: Not installed"
+                        android:textAppearance="@style/TextAppearance.FridaLauncher.Body" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/versionCardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                style="@style/Widget.FridaLauncher.Card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/statusCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Version Selection"
+                        android:textAppearance="@style/TextAppearance.FridaLauncher.Subtitle" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Select a Frida server version to install:"
+                        android:textAppearance="@style/TextAppearance.FridaLauncher.Body" />
+                            
+                    <Spinner
+                        android:id="@+id/versionSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/spinner_background"
+                        android:dropDownWidth="match_parent"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:popupBackground="@color/surface"
+                        android:spinnerMode="dropdown" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/installButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.FridaLauncher.Button.Install"
+                        android:text="Install"
+                        app:icon="@android:drawable/stat_sys_download" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/controlCardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                style="@style/Widget.FridaLauncher.Card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/versionCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Server Controls"
+                        android:textAppearance="@style/TextAppearance.FridaLauncher.Subtitle" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/startButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            style="@style/Widget.FridaLauncher.Button.Start"
+                            android:text="Start"
+                            app:icon="@android:drawable/ic_media_play" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/stopButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            style="@style/Widget.FridaLauncher.Button.Stop"
+                            android:text="Stop"
+                            app:icon="@android:drawable/ic_media_pause" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/uninstallButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            style="@style/Widget.FridaLauncher.Button.Uninstall"
+                            android:text="Uninstall"
+                            app:icon="@android:drawable/ic_menu_delete" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/refreshButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            style="@style/Widget.FridaLauncher.Button.Refresh"
+                            android:text="Refresh"
+                            app:icon="@android:drawable/ic_popup_sync" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/logCardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:minHeight="200dp"
+                style="@style/Widget.FridaLauncher.Card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/controlCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Logs"
+                            android:textAppearance="@style/TextAppearance.FridaLauncher.Subtitle" />
+                            
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/copyLogsButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:text="Copy"
+                            android:textColor="@color/blue_primary"
+                            android:textSize="12sp"
+                            app:icon="@android:drawable/ic_menu_save"
+                            app:iconSize="16dp"
+                            app:iconTint="@color/blue_primary" />
+                            
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/clearLogsButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="36dp"
+                            style="@style/Widget.MaterialComponents.Button.TextButton"
+                            android:text="Clear"
+                            android:textColor="@color/red_primary"
+                            android:textSize="12sp"
+                            app:icon="@android:drawable/ic_menu_close_clear_cancel"
+                            app:iconSize="16dp"
+                            app:iconTint="@color/red_primary" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/terminal_background"
+                        android:padding="2dp"
+                        android:minHeight="200dp">
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fillViewport="true">
+
+                            <ScrollView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:minHeight="200dp"
+                                android:fillViewport="true"
+                                android:scrollbars="vertical"
+                                android:fadeScrollbars="false"
+                                android:scrollbarStyle="insideOverlay">
+
+                                <TextView
+                                    android:id="@+id/statusMessageTextView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="12dp"
+                                    android:scrollbars="vertical|horizontal"
+                                    android:text="Ready"
+                                    android:textIsSelectable="true"
+                                    android:textAppearance="@style/TextAppearance.FridaLauncher.Terminal" />
+                            </ScrollView>
+                        </HorizontalScrollView>
+                    </FrameLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <FrameLayout
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorColor="@color/blue_primary"
+            app:trackColor="@color/surface_variant" />
+    </FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootRequiredBanner"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="@color/red_primary"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:contentPadding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Root Access Required"
+            android:textAppearance="@style/TextAppearance.FridaLauncher.Subtitle"
+            android:textColor="@color/text_on_primary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/rootRequiredMessageTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="This app requires root access to function properly. Please root your device or use a device with root access."
+            android:textAppearance="@style/TextAppearance.FridaLauncher.Body"
+            android:textColor="@color/text_on_primary" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
