@@ -52,7 +52,8 @@ These repetitive tasks slow down your workflow and introduce room for error—Fr
 ---
 ## Demo
 
-![ezgif-11757575020ac9](https://github.com/user-attachments/assets/66edad88-f5d6-46f9-9d8d-96b9c92d6bd5)
+![ezgif-1a5f1f73dba0c7](https://github.com/user-attachments/assets/eee78f07-33b8-4f63-b179-d41a51e1a70b)
+
 
 ## Screenshots
 
