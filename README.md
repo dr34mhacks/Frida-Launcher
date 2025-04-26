@@ -27,7 +27,14 @@
 
 Frida Launcher is a lightweight Android application that streamlines the installation, launching, and removal of the Frida server binary on your device or emulator. No more manual adb pushes or shell commands—just tap a button to manage your Frida server.
 
-Use it in penetration testing, reverse engineering, and security CTF challenges to quickly spin up your instrumentation environment.
+
+Before Frida Launcher, penetration testers and reverse engineers had to:
+
+Manually push the Frida server binary via adb push, then set executable permissions
+Unzip downloaded Frida releases and manage separate versions for each architecture.
+Start the server manually (adb shell ./frida-server &) and stop it between sessions.
+Uninstall old binaries to avoid conflicts, repeating these steps every time.
+These repetitive tasks slow down your workflow and introduce room for error—Frida Launcher automates them with one-tap actions.
 
 ---
 
@@ -38,7 +45,6 @@ Use it in penetration testing, reverse engineering, and security CTF challenges 
 - **One‑Tap Install**: Download and install the chosen Frida server version directly on your device.
 - **Server Controls**: Simplified Start, Stop, Uninstall, and Refresh actions.
 - **Live Logs**: View real‑time Frida server logs in‑app, with Copy and Clear controls.
-- **Objection Integration**: Use with Objection for runtime mobile exploration (`objection -g <app>`).
 
 ---
 
