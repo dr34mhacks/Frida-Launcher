@@ -23,6 +23,9 @@
 
 ---
 
+**Root access required on your device or emulator.**
+
+
 ## Introduction
 
 Frida Launcher is a lightweight Android application that streamlines the installation, launching, and removal of the Frida server binary on your device or emulator. No more manual adb pushes or shell commands—just tap a button to manage your Frida server.
