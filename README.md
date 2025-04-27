@@ -67,9 +67,8 @@ These repetitive tasks slow down your workflow and introduce room for error—Fr
 
 ### Main Dashboard
 
-<div align="center">
-  <img width="331" alt="image" src="https://github.com/user-attachments/assets/8e83df3b-8fc6-49a4-968d-e2939c847c67" />
-</div>
+![image](https://github.com/user-attachments/assets/39782149-09d8-4780-a547-36fcac0a7a83)
+
 
 
 ### NFC Challenge (Objection Example)
@@ -79,9 +78,8 @@ These repetitive tasks slow down your workflow and introduce room for error—Fr
 
 ### Logs Panel
 
-<div align="center">
-<img width="331" alt="image" src="https://github.com/user-attachments/assets/88f44e57-5bf0-40dd-b0e8-e0cdb0f91386" />
-</div>
+![image](https://github.com/user-attachments/assets/600b5a1c-0003-4340-99d7-0f71734bee6c)
+
 
 ---
 
