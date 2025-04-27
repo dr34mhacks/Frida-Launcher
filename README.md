@@ -19,7 +19,6 @@
   - [Build from Source](#build-from-source)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 - [Acknowledgements](#acknowledgements)
 
 ---
@@ -50,6 +49,12 @@ These repetitive tasks slow down your workflow and introduce room for error—Fr
 - **Server Controls**: Simplified Start, Stop, Uninstall, and Refresh actions.
 - **Live Logs**: View real‑time Frida server logs in‑app, with Copy and Clear controls.
 
+## What's New in 1.2
+
+- Refreshed app icons and UI enhancements for a better user experience.
+- Added support for custom flags and help dialogs to guide usage.
+- Improved logging mechanism and UI responsiveness.
+
 ---
 ## Demo
 
@@ -63,7 +68,7 @@ These repetitive tasks slow down your workflow and introduce room for error—Fr
 ### Main Dashboard
 
 <div align="center">
-  <img width="331" alt="image" src="https://github.com/user-attachments/assets/21984e36-41d7-449a-b185-36653e89d707" />
+  <img width="331" alt="image" src="https://github.com/user-attachments/assets/8e83df3b-8fc6-49a4-968d-e2939c847c67" />
 </div>
 
 
@@ -75,7 +80,7 @@ These repetitive tasks slow down your workflow and introduce room for error—Fr
 ### Logs Panel
 
 <div align="center">
-<img width="331" alt="image" src="https://github.com/user-attachments/assets/df9d61e5-1d32-40ef-9899-dd96665455eb" />
+<img width="331" alt="image" src="https://github.com/user-attachments/assets/88f44e57-5bf0-40dd-b0e8-e0cdb0f91386" />
 </div>
 
 ---
@@ -84,7 +89,6 @@ These repetitive tasks slow down your workflow and introduce room for error—Fr
 
 - **Android**: Minimum Android version: 7.0 Nougat (API Level 24) or higher
 - **USB Debugging**: Enabled on device/emulator
-- **ADB**: Installed and available in your `PATH`
 - **Internet**: To download Frida server binaries
 
 ---
@@ -93,10 +97,10 @@ These repetitive tasks slow down your workflow and introduce room for error—Fr
 
 ### Download APK
 
-Download the latest `app-debug.apk` from the [Releases page](https://github.com/thecybersandeep/Frida-Launcher/releases/download/v1.0.0/app-debug.apk) and install with:
+Download the latest `app-debug.apk` from the [Releases page](https://github.com/thecybersandeep/Frida-Launcher/releases/download/v1.2/Frida-Launcher-app-debug.apk) and install with:
 
 ```bash
-adb install app-debug.apk
+adb install Frida-Launcher-app-debug.apk
 ```
 
 ### Build from Source
@@ -117,7 +121,7 @@ gradlew installDebug
 ## Usage
 
 1. **Launch** the app on your device/emulator.
-2. Grant **storage** and **adb shell** permissions when prompted.
+2. Grant **storage** and **su** permissions when prompted.
 3. Tap **Refresh** to detect existing Frida installations.
 4. Select the desired Frida server version.
 5. Tap **Install** → **Start**.
