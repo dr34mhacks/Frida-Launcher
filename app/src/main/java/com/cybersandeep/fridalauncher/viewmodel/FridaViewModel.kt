@@ -13,7 +13,6 @@ import java.io.File
 
 class FridaViewModel : ViewModel() {
     
-    // Root status enum
     enum class RootStatus {
         UNKNOWN,
         AVAILABLE,
@@ -21,40 +20,36 @@ class FridaViewModel : ViewModel() {
         NON_ROOT_MODE
     }
     
-    // Status LiveData
     private val _statusMessage = MutableLiveData<String>()
     val statusMessage: LiveData<String> = _statusMessage
     
-    // Progress indicator
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
     
-    // Server status
     private val _isServerInstalled = MutableLiveData<Boolean>()
     val isServerInstalled: LiveData<Boolean> = _isServerInstalled
     
     private val _isServerRunning = MutableLiveData<Boolean>()
     val isServerRunning: LiveData<Boolean> = _isServerRunning
     
-    // Version information
     private val _installedVersion = MutableLiveData<String>()
     val installedVersion: LiveData<String> = _installedVersion
     
     private val _availableReleases = MutableLiveData<List<FridaRelease>>()
     val availableReleases: LiveData<List<FridaRelease>> = _availableReleases
     
-    // Selected version and architecture
     private val _selectedVersion = MutableLiveData<String>()
     val selectedVersion: LiveData<String> = _selectedVersion
     
     private val _selectedArchitecture = MutableLiveData<String>()
+    
+    private val _lastCustomFlags = MutableLiveData<String>()
+    val lastCustomFlags: LiveData<String> = _lastCustomFlags
     val selectedArchitecture: LiveData<String> = _selectedArchitecture
     
-    // Root access status
     private val _rootAccessStatus = MutableLiveData<RootStatus>()
     val rootAccessStatus: LiveData<RootStatus> = _rootAccessStatus
     
-    // Initialize with unknown status
     init {
         _isServerInstalled.value = false
         _isServerRunning.value = false
@@ -63,17 +58,13 @@ class FridaViewModel : ViewModel() {
         _installedVersion.value = "Unknown"
         _selectedArchitecture.value = FridaUtils.getDeviceArchitecture()
     }
-    
-    /**
-     * Check the current status of the Frida server
-     */
-    fun checkStatus(context: Context) {
+    fun checkStatus() {
         viewModelScope.launch {
             _isLoading.value = true
             _statusMessage.value = "Checking Frida server status..."
             
             try {
-                val isInstalled = FridaUtils.isFridaServerInstalled(context)
+                val isInstalled = FridaUtils.isFridaServerInstalled()
                 _isServerInstalled.value = isInstalled
                 
                 // Check installed version
@@ -106,9 +97,7 @@ class FridaViewModel : ViewModel() {
         }
     }
     
-    /**
-     * Load available Frida releases
-     */
+
     fun loadAvailableReleases() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -134,23 +123,17 @@ class FridaViewModel : ViewModel() {
         }
     }
     
-    /**
-     * Set the selected version
-     */
+
     fun setSelectedVersion(version: String) {
         _selectedVersion.value = version
     }
     
-    /**
-     * Set the selected architecture
-     */
+
     fun setSelectedArchitecture(architecture: String) {
         _selectedArchitecture.value = architecture
     }
     
-    /**
-     * Download and install the selected Frida server version
-     */
+
     fun downloadAndInstallFridaServer(context: Context) {
         viewModelScope.launch {
             _isLoading.value = true
@@ -198,12 +181,12 @@ class FridaViewModel : ViewModel() {
                 _statusMessage.value = "Installing Frida server $version..."
                 
                 // Install the Frida server
-                val isInstalled = FridaUtils.installFridaServer(context, fridaFile, version)
+                val isInstalled = FridaUtils.installFridaServer(fridaFile, version)
                 
                 if (isInstalled) {
                     _statusMessage.value = "Frida server $version installed successfully"
                     _isServerInstalled.value = true
-                    _installedVersion.value = version
+                    _installedVersion.value = version ?: "Unknown"
                 } else {
                     _statusMessage.value = "Failed to install Frida server"
                 }
@@ -220,12 +203,7 @@ class FridaViewModel : ViewModel() {
         }
     }
     
-    // We've removed the downloadAndInstallLatestFridaServer method since we're now using
-    // the version spinner to select versions, including the latest one
-    
-    /**
-     * Start the Frida server
-     */
+
     fun startFridaServer() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -249,9 +227,44 @@ class FridaViewModel : ViewModel() {
         }
     }
     
-    /**
-     * Stop the Frida server
-     */
+
+    fun startFridaServerWithCustomFlags(flags: String) {
+        // Sanitize input to prevent command injection
+        val sanitizedFlags = sanitizeFlags(flags)
+        
+        // Save the flags for future use
+        _lastCustomFlags.value = sanitizedFlags
+        
+        viewModelScope.launch {
+            _isLoading.value = true
+            _statusMessage.value = "Starting Frida server with custom flags: $sanitizedFlags"
+            
+            try {
+                val isStarted = FridaUtils.startFridaServerWithFlags(sanitizedFlags)
+                
+                if (isStarted) {
+                    _statusMessage.value = "Frida server started successfully with flags: $sanitizedFlags"
+                    _isServerRunning.value = true
+                } else {
+                    _statusMessage.value = "Failed to start Frida server with flags: $sanitizedFlags"
+                }
+            } catch (e: Exception) {
+                Logger.e("Error starting Frida server with custom flags", e)
+                _statusMessage.value = "Error starting Frida server with flags: $sanitizedFlags - ${e.message}"
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+    
+
+    private fun sanitizeFlags(flags: String): String {
+
+        return flags.replace(Regex("[;&|<>$`\\\\]"), "")
+            .trim()
+    }
+    
+
     fun stopFridaServer() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -275,9 +288,7 @@ class FridaViewModel : ViewModel() {
         }
     }
     
-    /**
-     * Uninstall the Frida server
-     */
+
     fun uninstallFridaServer() {
         viewModelScope.launch {
             _isLoading.value = true
@@ -302,9 +313,7 @@ class FridaViewModel : ViewModel() {
         }
     }
     
-    /**
-     * Clean up downloaded files
-     */
+
     private fun cleanupDownloadedFile(file: File) {
         try {
             if (file.exists()) {

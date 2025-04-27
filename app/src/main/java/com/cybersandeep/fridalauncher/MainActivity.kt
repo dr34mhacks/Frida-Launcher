@@ -10,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.ScrollView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -53,21 +55,66 @@ class MainActivity : AppCompatActivity() {
     private fun initializeApp() {
         setupUI()
         setupObservers()
-        viewModel.checkStatus(this)
+        setupAboutSection()
+        viewModel.checkStatus()
         viewModel.loadAvailableReleases()
+    }
+    
+    private fun setupAboutSection() {
+        val aboutCardCollapsed = findViewById<View>(R.id.aboutCardView)
+        aboutCardCollapsed.setOnClickListener {
+            showExpandedAboutDialog()
+        }
+    }
+    
+    private fun showExpandedAboutDialog() {
+        val dialog = AlertDialog.Builder(this, R.style.Theme_Fridalauncher_Dialog)
+            .create()
+        
+        val expandedView = layoutInflater.inflate(R.layout.about_footer_expanded, null)
+        
+        expandedView.findViewById<View>(R.id.backButton).setOnClickListener {
+            dialog.dismiss()
+        }
+        
+        expandedView.findViewById<View>(R.id.issuesLinkTextView).setOnClickListener {
+            openUrl("https://github.com/thecybersandeep/Frida-Launcher/issues")
+        }
+        
+        expandedView.findViewById<View>(R.id.linkedinLinkTextView).setOnClickListener {
+            openUrl("https://www.linkedin.com/in/sandeepwawdane")
+        }
+        
+        expandedView.findViewById<View>(R.id.twitterLinkTextView).setOnClickListener {
+            openUrl("https://x.com/thecybersandeep")
+        }
+        
+        dialog.setView(expandedView)
+        
+        dialog.show()
+        dialog.window?.apply {
+            setBackgroundDrawableResource(android.R.color.transparent)
+            setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        }
+    }
+    
+    private fun openUrl(url: String) {
+        val intent = android.content.Intent(android.content.Intent.ACTION_VIEW)
+        intent.data = android.net.Uri.parse(url)
+        startActivity(intent)
     }
     
     private fun showRootRequiredBanner() {
         if (rootBannerAdded) return
         
-        // Inflate the banner
         val bannerBinding = RootRequiredBannerBinding.inflate(layoutInflater)
         
-        // Add the banner at the top of the layout, below the app bar
         val container = findViewById<ViewGroup>(R.id.main)
-        container.addView(bannerBinding.root, 1) // Add after AppBarLayout
+        container.addView(bannerBinding.root, 1)
         
-        // Show a dialog explaining the issue
         AlertDialog.Builder(this)
             .setTitle("Root Access Required")
             .setMessage("This app requires root access to function properly. Without root access, you won't be able to install or run Frida server.\n\nPlease root your device or use a device with root access.")
@@ -82,8 +129,8 @@ class MainActivity : AppCompatActivity() {
         binding.statusMessageTextView.setTextIsSelectable(true)
         
         val deviceArch = FridaUtils.getDeviceArchitecture()
-        binding.deviceInfoTextView.text = "Device: ${Build.MODEL}"
-        binding.architectureTextView.text = deviceArch
+        binding.deviceInfoTextView.text = "Device: ${Build.MODEL} (${deviceArch})"
+        binding.architectureTextView.visibility = View.GONE
         
         viewModel.setSelectedArchitecture(deviceArch)
         
@@ -92,7 +139,19 @@ class MainActivity : AppCompatActivity() {
         }
         
         binding.startButton.setOnClickListener {
-            viewModel.startFridaServer()
+            if (viewModel.isServerRunning.value == true) {
+                Toast.makeText(this, "Server is already running. Stop it first.", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.startFridaServer()
+            }
+        }
+        
+        binding.customRunButton.setOnClickListener {
+            if (viewModel.isServerRunning.value == true) {
+                Toast.makeText(this, "Server is already running. Stop it first.", Toast.LENGTH_SHORT).show()
+            } else {
+                showCustomFlagsDialog()
+            }
         }
         
         binding.stopButton.setOnClickListener {
@@ -104,7 +163,7 @@ class MainActivity : AppCompatActivity() {
         }
         
         binding.refreshButton.setOnClickListener {
-            viewModel.checkStatus(this)
+            viewModel.checkStatus()
             viewModel.loadAvailableReleases()
         }
         
@@ -126,18 +185,100 @@ class MainActivity : AppCompatActivity() {
         binding.statusMessageTextView.text = "[$timestamp] Frida Launcher initialized"
     }
     
+    private fun showCustomFlagsDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_custom_flags, null)
+        
+        val editText = dialogView.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.flagsEditText)
+        val helpButton = dialogView.findViewById<android.widget.ImageView>(R.id.helpButton)
+        
+        viewModel.lastCustomFlags.value?.let { lastFlags ->
+            editText.setText(lastFlags)
+            editText.setSelection(lastFlags.length)
+        }
+        
+        helpButton.setOnClickListener {
+            showFlagsHelpDialog()
+        }
+        
+        val dialog = com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("Run with Custom Flags")
+            .setView(dialogView)
+            .setPositiveButton("Start", null)
+            .setNegativeButton("Cancel", null)
+            .create()
+        
+        dialog.show()
+        
+        dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val customFlags = editText.text.toString().trim()
+            viewModel.startFridaServerWithCustomFlags(customFlags)
+            dialog.dismiss()
+        }
+        
+        dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_NEGATIVE).setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+    
+    private fun showFlagsHelpDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_flags_help, null)
+        val flagsContainer = dialogView.findViewById<LinearLayout>(R.id.flagsContainer)
+        
+        val flagItems = listOf(
+            Pair("-l, --listen=ADDRESS", "Listen on ADDRESS (e.g., 0.0.0.0:27042)"),
+            Pair("--certificate=CERT", "Enable TLS using CERTIFICATE"),
+            Pair("--origin=ORIGIN", "Only accept requests with Origin header"),
+            Pair("--token=TOKEN", "Require authentication using TOKEN"),
+            Pair("--asset-root=ROOT", "Serve static files inside ROOT"),
+            Pair("-d, --directory=DIR", "Store binaries in DIRECTORY"),
+            Pair("-D, --daemonize", "Detach and become a daemon"),
+            Pair("--policy-softener=TYPE", "Select policy softener"),
+            Pair("-P, --disable-preload", "Disable preload optimization"),
+            Pair("-C, --ignore-crashes", "Disable native crash reporter")
+        )
+        
+        flagItems.forEach { (flag, description) ->
+            val flagItemView = layoutInflater.inflate(R.layout.item_flag, flagsContainer, false)
+            
+            val flagNameText = flagItemView.findViewById<TextView>(R.id.flagNameText)
+            val flagDescriptionText = flagItemView.findViewById<TextView>(R.id.flagDescriptionText)
+            
+            flagNameText.text = flag
+            flagDescriptionText.text = description
+            
+            flagsContainer.addView(flagItemView)
+        }
+        
+        com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+            .setTitle("Available Flags")
+            .setView(dialogView)
+            .setPositiveButton("Close", null)
+            .show()
+    }
+    
     private fun setupObservers() {
         viewModel.isLoading.observe(this, Observer { isLoading ->
             binding.loadingOverlay.visibility = if (isLoading) View.VISIBLE else View.GONE
             
             binding.installButton.isEnabled = !isLoading
-            binding.startButton.isEnabled = !isLoading
-            binding.stopButton.isEnabled = !isLoading
-            binding.uninstallButton.isEnabled = !isLoading
             binding.refreshButton.isEnabled = !isLoading
             binding.versionSpinner.isEnabled = !isLoading
             binding.copyLogsButton.isEnabled = !isLoading
             binding.clearLogsButton.isEnabled = !isLoading
+            binding.uninstallButton.isEnabled = !isLoading
+            
+            if (!isLoading) {
+                val isInstalled = viewModel.isServerInstalled.value == true
+                val isRunning = viewModel.isServerRunning.value == true
+                
+                binding.startButton.isEnabled = isInstalled && !isRunning
+                binding.customRunButton.isEnabled = isInstalled && !isRunning
+                binding.stopButton.isEnabled = isInstalled && isRunning
+            } else {
+                binding.startButton.isEnabled = false
+                binding.customRunButton.isEnabled = false
+                binding.stopButton.isEnabled = false
+            }
         })
         
         viewModel.statusMessage.observe(this, Observer { message ->
@@ -200,7 +341,12 @@ class MainActivity : AppCompatActivity() {
             
             binding.installedStatusTextView.text = spannable
             
+            // Show/hide server controls based on installation status
+            binding.serverControlsLayout.visibility = if (isInstalled) View.VISIBLE else View.GONE
+            
+            // Update button states
             binding.startButton.isEnabled = isInstalled && viewModel.isServerRunning.value != true
+            binding.customRunButton.isEnabled = isInstalled && viewModel.isServerRunning.value != true
             binding.stopButton.isEnabled = isInstalled && viewModel.isServerRunning.value == true
             binding.uninstallButton.isEnabled = isInstalled
         })
@@ -224,6 +370,7 @@ class MainActivity : AppCompatActivity() {
             binding.runningStatusTextView.text = spannable
             
             binding.startButton.isEnabled = !isRunning && viewModel.isServerInstalled.value == true
+            binding.customRunButton.isEnabled = !isRunning && viewModel.isServerInstalled.value == true
             binding.stopButton.isEnabled = isRunning
         })
         

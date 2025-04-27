@@ -158,13 +158,32 @@
                         android:popupBackground="@color/surface"
                         android:spinnerMode="dropdown" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/installButton"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        style="@style/Widget.FridaLauncher.Button.Install"
-                        android:text="Install"
-                        app:icon="@android:drawable/stat_sys_download" />
+                        android:orientation="horizontal">
+                        
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/installButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="8dp"
+                            style="@style/Widget.FridaLauncher.Button.Install"
+                            android:text="Install"
+                            app:icon="@android:drawable/stat_sys_download" />
+                            
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/refreshButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            style="@style/Widget.FridaLauncher.Button.Refresh"
+                            android:text="Refresh"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            app:icon="@android:drawable/ic_popup_sync" />
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -191,57 +210,70 @@
                         android:textAppearance="@style/TextAppearance.FridaLauncher.Subtitle" />
 
                     <LinearLayout
+                        android:id="@+id/serverControlsLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/startButton"
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            style="@style/Widget.FridaLauncher.Button.Start"
-                            android:text="Start"
-                            app:icon="@android:drawable/ic_media_play" />
+                            android:orientation="horizontal">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/stopButton"
-                            android:layout_width="0dp"
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/startButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="8dp"
+                                style="@style/Widget.FridaLauncher.Button.Start"
+                                android:text="Start"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                app:icon="@android:drawable/ic_media_play" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/customRunButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                style="@style/Widget.FridaLauncher.Button.Start"
+                                android:text="Custom"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                app:icon="@android:drawable/ic_menu_manage" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            style="@style/Widget.FridaLauncher.Button.Stop"
-                            android:text="Stop"
-                            app:icon="@android:drawable/ic_media_pause" />
-                    </LinearLayout>
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/stopButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_marginEnd="8dp"
+                                style="@style/Widget.FridaLauncher.Button.Stop"
+                                android:text="Stop"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                app:icon="@android:drawable/ic_media_pause" />
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/uninstallButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:layout_weight="1"
-                            style="@style/Widget.FridaLauncher.Button.Uninstall"
-                            android:text="Uninstall"
-                            app:icon="@android:drawable/ic_menu_delete" />
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/refreshButton"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            style="@style/Widget.FridaLauncher.Button.Refresh"
-                            android:text="Refresh"
-                            app:icon="@android:drawable/ic_popup_sync" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/uninstallButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                style="@style/Widget.FridaLauncher.Button.Uninstall"
+                                android:text="Uninstall"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                app:icon="@android:drawable/ic_menu_delete" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -336,6 +368,17 @@
                     </FrameLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+            
+            <!-- About Footer (Collapsed by default) -->
+            <include
+                layout="@layout/about_section"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/logCardView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+                
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

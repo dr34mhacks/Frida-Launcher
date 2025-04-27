@@ -11,8 +11,8 @@ android {
         applicationId = "com.cybersandeep.fridalauncher"
         minSdk = 24
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,7 +24,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            isDebuggable = false
         }
+        // Debug configuration is handled automatically by the build system
+    }
+    
+    lint {
+        baseline = file("lint-baseline.xml")
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -60,6 +66,10 @@ dependencies {
     
     // Gson for JSON parsing
     implementation("com.google.code.gson:gson:2.10.1")
+    
+    // Add these dependencies to fix the missing class issues
+    implementation("androidx.profileinstaller:profileinstaller:1.4.0")
+    implementation("androidx.startup:startup-runtime:1.1.1")
     
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

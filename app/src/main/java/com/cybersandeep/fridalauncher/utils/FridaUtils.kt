@@ -385,18 +385,18 @@ object FridaUtils {
     /**
      * Copy the Frida server binary to /data/local/tmp and set permissions
      */
-    suspend fun installFridaServer(context: Context, fridaFile: File, version: String): Boolean {
+    suspend fun installFridaServer(fridaFile: File, version: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
                 // Commands to copy the file and set permissions
-                val result1 = executeSuCommand("cp ${fridaFile.absolutePath} $FRIDA_BINARY_PATH")
-                val result2 = executeSuCommand("chmod 755 $FRIDA_BINARY_PATH")
+                executeSuCommand("cp ${fridaFile.absolutePath} $FRIDA_BINARY_PATH")
+                executeSuCommand("chmod 755 $FRIDA_BINARY_PATH")
                 
                 // Save the version information
                 saveInstalledVersion(version)
                 
                 // Verify the file exists after installation
-                val isInstalled = isFridaServerInstalled(context)
+                val isInstalled = isFridaServerInstalled()
                 
                 if (isInstalled) {
                     Logger.i("Frida server $version installed to $FRIDA_BINARY_PATH")
@@ -419,7 +419,7 @@ object FridaUtils {
         return withContext(Dispatchers.IO) {
             try {
                 // Save version to a file in /data/local/tmp
-                val result = executeSuCommand("echo '$version' > $FRIDA_VERSION_FILE")
+                executeSuCommand("echo '$version' > $FRIDA_VERSION_FILE")
                 Logger.i("Saved Frida version info: $version")
                 return@withContext true
             } catch (e: Exception) {
@@ -459,6 +459,13 @@ object FridaUtils {
      * Start the Frida server
      */
     suspend fun startFridaServer(): Boolean {
+        return startFridaServerWithFlags("")
+    }
+    
+    /**
+     * Start the Frida server with custom flags
+     */
+    suspend fun startFridaServerWithFlags(flags: String): Boolean {
         return withContext(Dispatchers.IO) {
             try {
                 // First check if the server is already running
@@ -468,7 +475,14 @@ object FridaUtils {
                 }
                 
                 // Command to start Frida server in the background with proper nohup
-                val output = executeSuCommand("nohup $FRIDA_BINARY_PATH > /dev/null 2>&1 &")
+                val command = if (flags.isBlank()) {
+                    "nohup $FRIDA_BINARY_PATH > /dev/null 2>&1 &"
+                } else {
+                    "nohup $FRIDA_BINARY_PATH $flags > /dev/null 2>&1 &"
+                }
+                
+                Logger.i("Starting Frida server with command: $command")
+                val output = executeSuCommand(command)
                 Logger.d("Start command output: $output")
                 
                 // Give it a moment to start
@@ -478,7 +492,7 @@ object FridaUtils {
                 val isRunning = isFridaServerRunning()
                 
                 if (isRunning) {
-                    Logger.i("Frida server started successfully")
+                    Logger.i("Frida server started successfully" + if (flags.isNotBlank()) " with flags: $flags" else "")
                     return@withContext true
                 } else {
                     // Try to get more diagnostic information
@@ -486,7 +500,12 @@ object FridaUtils {
                     Logger.d("Frida binary check: $checkOutput")
                     
                     // Try to run it with output to see any errors
-                    val testOutput = executeSuCommand("$FRIDA_BINARY_PATH 2>&1")
+                    val testCommand = if (flags.isBlank()) {
+                        "$FRIDA_BINARY_PATH 2>&1"
+                    } else {
+                        "$FRIDA_BINARY_PATH $flags 2>&1"
+                    }
+                    val testOutput = executeSuCommand(testCommand)
                     Logger.e("Failed to start Frida server. Test output: $testOutput")
                     
                     return@withContext false
@@ -619,7 +638,7 @@ object FridaUtils {
     /**
      * Check if the Frida server is installed
      */
-    suspend fun isFridaServerInstalled(context: Context): Boolean {
+    suspend fun isFridaServerInstalled(): Boolean {
         return withContext(Dispatchers.IO) {
             try {
                 // Command to check if Frida server exists
