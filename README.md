@@ -69,8 +69,7 @@ Say goodbye to:
 
 ### Main Dashboard
 
-<img src="https://github.com/user-attachments/assets/62b5de1c-67ea-4d07-a393-e2818ab279a9" alt="Main Dashboard" width="700" style="max-height: 900px; object-fit: contain;" />
-
+![dahbordremovebg-Photoroom](https://github.com/user-attachments/assets/2850b6fd-07ec-4f4e-bda3-9f7e7cb07fee)
 
 ---
 
@@ -80,9 +79,10 @@ Say goodbye to:
 
 ---
 
-### Logs Panel + Superuser Rights
+### Logs Panel
 
-<img src="https://github.com/user-attachments/assets/1a6a4c2f-8333-4d45-a770-8d72377b891f" alt="Logs Panel" width="500" style="max-height: 700px; object-fit: contain;" />
+![logsbgremove-Photoroom](https://github.com/user-attachments/assets/63d0815a-08ae-47bf-978a-892968aa791b)
+
 
 ---
 
