@@ -65,23 +65,26 @@ Say goodbye to:
 
 ## 📸 Screenshots
 
+---
+
 ### Main Dashboard
+<img src="https://github.com/user-attachments/assets/62b5de1c-67ea-4d07-a393-e2818ab279a9" alt="Main Dashboard" width="100%" />
 
-![image](https://github.com/user-attachments/assets/5afd7861-66a6-4709-8edc-dc7323c4a718)
-
+---
 
 ### NFC Challenge (with Objection)
-<img width="1000" alt="NFC Example" src="https://github.com/user-attachments/assets/de9e564e-f788-4eb3-bda5-54ae9dd0827c" />
+<img src="https://github.com/user-attachments/assets/de9e564e-f788-4eb3-bda5-54ae9dd0827c" alt="NFC Example" width="100%" />
 
-### Logs Panel
-![image](https://github.com/user-attachments/assets/498962ca-ad55-44b6-a2e2-0a779323bf3e)
+---
 
+### Logs Panel + Superuser Rights
+<img src="https://github.com/user-attachments/assets/1a6a4c2f-8333-4d45-a770-8d72377b891f" alt="Logs Panel and SU Rights" width="100%" />
 
 ---
 
 ## 📱 Demo
 
-will be added soon
+🎥 Demo video will be added soon! 
 
 ---
 
