@@ -114,7 +114,7 @@ adb install Frida-Launcher-app-debug.apk
 ### Option 2: Build from Source
 ```bash
 # Clone the repo
-git clone https://github.com/thecybersandeep/Frida-Launcher.git
+git clone https://github.com/thecybersandeep/Frida-Launcher
 cd Frida-Launcher
 
 # Build APK
