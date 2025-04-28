@@ -1,144 +1,184 @@
-# Frida Launcher
+# Frida Launcher 🚀
 
-**An Android app to easily manage Frida server on your device or emulator**
+**Effortlessly manage Frida server on Android devices and emulators with a single tap!**
+
 
 <div align="center">
-  <img width="331" alt="image" src="logo.png" />
+  <img width="331" alt="Frida Launcher Logo" src="logo.png" />
 </div>
 
 ---
 
-## Table of Contents
-
+## 📋 Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
+- [What's New in v1.2](#whats-new-in-v12)
 - [Screenshots](#screenshots)
 - [Requirements](#requirements)
 - [Installation](#installation)
-  - [Download APK](#download-apk)
-  - [Build from Source](#build-from-source)
 - [Usage](#usage)
+- [How It Works](#how-it-works)
 - [Contributing](#contributing)
 - [Acknowledgements](#acknowledgements)
 
 ---
 
-**Root access required on your device or emulator.**
-
-
-## Introduction
-
-Frida Launcher is a lightweight Android application that streamlines the installation, launching, and removal of the Frida server binary on your device or emulator. No more manual adb pushes or shell commands—just tap a button to manage your Frida server.
-
-
-Before Frida Launcher, penetration testers and reverse engineers had to:
-
-Manually push the Frida server binary via adb push, then set executable permissions
-Unzip downloaded Frida releases and manage separate versions for each architecture.
-Start the server manually (adb shell ./frida-server &) and stop it between sessions.
-Uninstall old binaries to avoid conflicts, repeating these steps every time.
-These repetitive tasks slow down your workflow and introduce room for error—Frida Launcher automates them with one-tap actions.
+> **⚠️ Important:**  
+> - **Root access** is mandatory on your device or emulator.  
+> - A **Superuser Manager app** (e.g., Magisk, SuperSU) is required to grant root permissions.
 
 ---
 
-## Features
+## 🌟 Introduction
 
-- **Device Status**: Detect device architecture (e.g., `arm64`), Frida server installation status, and running state.
-- **Version Selection**: Browse and select from all available Frida server releases.
-- **One‑Tap Install**: Download and install the chosen Frida server version directly on your device.
-- **Server Controls**: Simplified Start, Stop, Uninstall, and Refresh actions.
-- **Live Logs**: View real‑time Frida server logs in‑app, with Copy and Clear controls.
+Manually setting up Frida server is a chore—pushing binaries, tweaking permissions, and juggling terminal commands eats up your time. **Frida Launcher** changes the game!  
 
-## What's New in 1.2
+This lightweight Android app automates Frida server management with a clean, intuitive interface. Install, start, and monitor Frida with ease, so you can focus on what matters: **security research and pentesting**.  
 
-- Refreshed app icons and UI enhancements for a better user experience.
-- Added support for custom flags and help dialogs to guide usage.
-- Improved logging mechanism and UI responsiveness.
+Say goodbye to:
+- Manual `adb push` and permission tweaks
+- Architecture mismatches
+- Terminal-based start/stop hassles  
+
+**Frida Launcher** handles it all with **one-tap simplicity**. 🔧
 
 ---
-## Demo
 
+## ✨ Features
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/eee78f07-33b8-4f63-b179-d41a51e1a70b" alt="Project Demo GIF" />
-</div>
+- **Device Insights:** Detects your device architecture (e.g., `arm64`) and Frida status (installed/running).
+- **Version Picker:** Choose from available Frida server versions in-app.
+- **One-Tap Install:** Automatically downloads and sets up the right binary.
+- **Easy Controls:** Start, stop, uninstall, or refresh with a single tap.
+- **Live Logging:** View real-time Frida server logs with copy/clear options.
 
-## Screenshots
+---
+
+## 🆕 What's New in v1.2
+
+- 🎨 **Modernized UI** with polished icons for Play Store.
+- ⚙️ **Custom Arguments Support** for flexible Frida server tweaks.
+- 📖 **In-App Help Dialogs** to onboard new users.
+- ⚡ **Snappier Performance** with optimized log handling.
+
+---
+
+## 📸 Screenshots
 
 ### Main Dashboard
 
-![image](https://github.com/user-attachments/assets/39782149-09d8-4780-a547-36fcac0a7a83)
+![image](https://github.com/user-attachments/assets/5afd7861-66a6-4709-8edc-dc7323c4a718)
 
 
-
-### NFC Challenge (Objection Example)
-
-<img width="1000" alt="image" src="https://github.com/user-attachments/assets/de9e564e-f788-4eb3-bda5-54ae9dd0827c" />
-
+### NFC Challenge (with Objection)
+<img width="1000" alt="NFC Example" src="https://github.com/user-attachments/assets/de9e564e-f788-4eb3-bda5-54ae9dd0827c" />
 
 ### Logs Panel
+![image](https://github.com/user-attachments/assets/498962ca-ad55-44b6-a2e2-0a779323bf3e)
 
-![image](https://github.com/user-attachments/assets/600b5a1c-0003-4340-99d7-0f71734bee6c)
-
-
----
-
-## Requirements
-
-- **Android**: Minimum Android version: 7.0 Nougat (API Level 24) or higher
-- **USB Debugging**: Enabled on device/emulator
-- **Internet**: To download Frida server binaries
 
 ---
 
-## Installation
+## 📱 Demo
 
-### Download APK
+will be added soon
 
-Download the latest `app-debug.apk` from the [Releases page](https://github.com/thecybersandeep/Frida-Launcher/releases/download/v1.2/Frida-Launcher-app-debug.apk) and install with:
+---
+
+## ✅ Requirements
+
+- **Android Version:** 7.0 Nougat (API 24) or higher
+- **USB Debugging:** Enabled
+- **Internet Connection:** Required for downloading Frida binaries
+- **Root Access:** Mandatory
+- **Superuser Manager App:** Installed (e.g., Magisk, SuperSU) to handle root permission prompts
+
+---
+
+## 🛠️ Installation
+
+### Option 1: Download APK
+Get the latest APK from the [Releases page](https://github.com/thecybersandeep/Frida-Launcher/releases/download/v1.2/Frida-Launcher-app-debug.apk):
 
 ```bash
 adb install Frida-Launcher-app-debug.apk
 ```
 
-### Build from Source
-
+### Option 2: Build from Source
 ```bash
-# Clone this repository
+# Clone the repo
 git clone https://github.com/thecybersandeep/Frida-Launcher.git
-cd frida-launcher
+cd Frida-Launcher
 
-# Open in Android Studio
-gradlew clean assembleDebug
-# or build via command line
-gradlew installDebug
+# Build APK
+./gradlew clean assembleDebug
+
+# Or install directly
+./gradlew installDebug
 ```
 
+> 💡 **Pro Tip:** Open in Android Studio for a smoother build experience.
+
 ---
 
-## Usage
+## 🚀 Usage
 
-1. **Launch** the app on your device/emulator.
-2. Grant **storage** and **su** permissions when prompted.
-3. Tap **Refresh** to detect existing Frida installations.
-4. Select the desired Frida server version.
-5. Tap **Install** → **Start**.
+1. Launch **Frida Launcher**.
+2. Grant **Storage** and **Root (su)** permissions via your Superuser Manager app.
+3. Tap **Refresh** to check Frida server status.
+4. Select a Frida version and tap **Install**.
+5. Hit **Start** to run the server.
 6. Use **Stop** or **Uninstall** as needed.
-7. View logs in the **Logs** panel; copy or clear logs with the provided buttons.
+7. Monitor real-time logs in the **Logs Panel**.
 
 ---
 
-## Contributing
+## 🔍 How It Works
 
-Contributions, issues, and feature requests are welcome!
+Frida Launcher streamlines Frida server management with smart automation. Here's the magic behind each action:
+
+| Action | Description |
+|:-------|:------------|
+| **Refresh** | Scans device architecture (e.g., `arm64`), checks Frida installation/running status, and updates the UI. |
+| **Install** | Downloads the correct Frida binary, places it in the right directory, and sets executable permissions (`chmod +x`). |
+| **Start** | Runs the Frida server in the background using root (`su`). Logs confirm successful startup. |
+| **Stop** | Kills the running Frida server process with root commands. |
+| **Uninstall** | Removes the Frida server binary from the device. |
+| **Logs Panel** | Streams live server logs with options to copy or clear. |
+| **Custom Flags** | Allows passing custom arguments (e.g., `-D`, `-n`) to the Frida server. |
+| **Help Dialogs** | Provides in-app guidance for features and flags, perfect for beginners. |
+
+### Smart UI Logic
+- Buttons (Start, Stop, Uninstall) activate only when relevant.
+- **Install** unlocks after selecting a version.
+- **Start** enables post-installation.
+- **Stop** activates only when the server is running.
+- The UI **auto-refreshes** after actions like Stop or Uninstall to keep status accurate.
+
+All actions are designed to prevent errors and ensure seamless server management.
+
+---
+
+## 🤝 Contributing
+
+Got ideas or fixes? We’d love your input!  
+- Submit feedback or bug reports via [Issues](https://github.com/thecybersandeep/Frida-Launcher/issues).
+- Fork, tweak, and send a [Pull Request](https://github.com/thecybersandeep/Frida-Launcher/pulls).  
+
+Let’s make Frida Launcher even better! 🌟
 
 ---
 
 ## Acknowledgements
 
-- [Frida](https://frida.re) for the powerful instrumentation toolkit
+- Huge thanks to [Frida](https://frida.re) for powering dynamic instrumentation.
 
 ---
 
-*Happy hacking!*
+*Happy Hacking!
 
+---
+
+## ✨ Bonus Tip
+
+If you find Frida Launcher useful, please consider giving it a ⭐ on GitHub!
