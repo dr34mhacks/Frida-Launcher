@@ -69,7 +69,8 @@ Say goodbye to:
 
 ### Main Dashboard
 
-<img src="https://raw.githubusercontent.com/thecybersandeep/Frida-Launcher/main/images/Screenshot_20250428_101502.png" alt="Frida Launcher Dashboard" width="700" style="max-height:900px; object-fit: contain;" />
+<img src="https://github.com/user-attachments/assets/62b5de1c-67ea-4d07-a393-e2818ab279a9" alt="Main Dashboard" width="700" style="max-height: 900px; object-fit: contain;" />
+
 
 ---
 
@@ -81,7 +82,7 @@ Say goodbye to:
 
 ### Logs Panel + Superuser Rights
 
-<img src="https://raw.githubusercontent.com/thecybersandeep/Frida-Launcher/main/images/logs_panel.png" alt="Frida Launcher Logs Panel" width="500" style="max-height: 700px; object-fit: contain;" />
+<img src="https://github.com/user-attachments/assets/1a6a4c2f-8333-4d45-a770-8d72377b891f" alt="Logs Panel" width="500" style="max-height: 700px; object-fit: contain;" />
 
 ---
 
