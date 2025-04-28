@@ -153,7 +153,7 @@ Frida Launcher streamlines Frida server management with smart automation. Here's
 | **Uninstall** | Removes the Frida server binary from the device. |
 | **Logs Panel** | Streams live server logs with options to copy or clear. |
 | **Custom Flags** | Allows passing custom arguments (e.g., `-D`, `-n`) to the Frida server. |
-| **Help Dialogs** |  flags info |
+| **Help Dialogs** |  Flags info |
 
 ### Smart UI Logic
 - Buttons (Start, Stop, Uninstall) activate only when relevant.
@@ -173,12 +173,6 @@ Got ideas or fixes? We’d love your input!
 - Fork, tweak, and send a [Pull Request](https://github.com/thecybersandeep/Frida-Launcher/pulls).  
 
 Let’s make Frida Launcher even better! 🌟
-
----
-
-## Acknowledgements
-
-- Huge thanks to [Frida](https://frida.re) for powering dynamic instrumentation.
 
 ---
 
