@@ -68,7 +68,7 @@ Say goodbye to:
 ---
 
 ### Main Dashboard
-<img src="https://github.com/user-attachments/assets/62b5de1c-67ea-4d07-a393-e2818ab279a9" alt="Main Dashboard" width="100%" />
+<img src="https://github.com/user-attachments/assets/62b5de1c-67ea-4d07-a393-e2818ab279a9" alt="Main Dashboard" width="700" />
 
 ---
 
@@ -78,7 +78,7 @@ Say goodbye to:
 ---
 
 ### Logs Panel + Superuser Rights
-<img src="https://github.com/user-attachments/assets/1a6a4c2f-8333-4d45-a770-8d72377b891f" alt="Logs Panel and SU Rights" width="100%" />
+<img src="https://github.com/user-attachments/assets/1a6a4c2f-8333-4d45-a770-8d72377b891f" alt="Logs Panel and SU Rights" width="700%" />
 
 ---
 
