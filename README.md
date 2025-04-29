@@ -6,6 +6,14 @@
   <img width="331" alt="Frida Launcher Logo" src="logo.png" />
 </div>
 
+<div align="center">
+  <a href="https://github.com/thecybersandeep/Frida-Launcher/stargazers"><img src="https://img.shields.io/github/stars/thecybersandeep/Frida-Launcher?style=social" alt="GitHub stars"></a>
+  <a href="https://github.com/thecybersandeep/Frida-Launcher/network/members"><img src="https://img.shields.io/github/forks/thecybersandeep/Frida-Launcher?style=social" alt="GitHub forks"></a>
+  <a href="https://github.com/thecybersandeep/Frida-Launcher/issues"><img src="https://img.shields.io/github/issues/thecybersandeep/Frida-Launcher" alt="GitHub issues"></a>
+  <a href="https://github.com/thecybersandeep/Frida-Launcher/releases"><img src="https://img.shields.io/github/v/release/thecybersandeep/Frida-Launcher" alt="GitHub release"></a>
+  <a href="https://github.com/thecybersandeep/Frida-Launcher/releases"><img src="https://img.shields.io/github/downloads/thecybersandeep/Frida-Launcher/total" alt="GitHub downloads"></a>
+</div>
+
 ---
 
 ## 📋 Table of Contents
@@ -98,20 +106,7 @@ Say goodbye to:
 - **USB Debugging:** Enabled
 - **Internet Connection:** Required for downloading Frida binaries
 - **Root Access:** Mandatory
-- **Superuser Manager App:** Installed (e.g., Magisk, SuperSU) to handle root permission prompts
-
----
-
-## Installation
-
-### Option 1: Download APK
-Get the latest APK from the [Releases page](https://github.com/thecybersandeep/Frida-Launcher/releases/download/v1.2/Frida-Launcher-app-debug.apk):
-
-```bash
-adb install Frida-Launcher-app-debug.apk
-```
-
-### Option 2: Build from Source
+- **Superuser Manager App:** Installed (e.g., Magisk, Built from Source
 ```bash
 # Clone the repo
 git clone https://github.com/thecybersandeep/Frida-Launcher
