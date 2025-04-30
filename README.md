@@ -65,9 +65,8 @@ Say goodbye to:
 
 ## What's New in v12
 
-- 🎨 **Modernized UI** with polished icons for Play Store.
+- 🎨 **Modernized UI** with polished icon.
 - ⚙️ **Custom Arguments Support** for flexible Frida server tweaks.
-- 📖 **In-App Help Dialogs** to onboard new users.
 - ⚡ **Snappier Performance** with optimized log handling.
 
 ---
